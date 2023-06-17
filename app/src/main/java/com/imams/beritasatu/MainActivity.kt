@@ -4,8 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.imams.beritasatu.R
-import com.imams.topnews.ui.home.HomeTopNewsActivity
+import com.imams.searchnews.EverythingNewsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -22,7 +21,8 @@ class MainActivity : AppCompatActivity() {
     private fun gotoHome() {
         lifecycleScope.launch {
             delay(1000)
-            startActivity(Intent(this@MainActivity, HomeTopNewsActivity::class.java))
+//            startActivity(Intent(this@MainActivity, HomeTopNewsActivity::class.java))
+            startActivity(Intent(this@MainActivity, EverythingNewsActivity::class.java))
             finish()
         }
     }

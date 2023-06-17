@@ -33,6 +33,15 @@
         <activity
             android:name="com.imams.topnews.ui.detail.DetailActivity"
             android:exported="false" />
+
+        <activity
+            android:name="com.imams.searchnews.EverythingNewsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.imams.searchnews.ui.NewsSourcesActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

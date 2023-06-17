@@ -4,7 +4,9 @@ import com.imams.core.TheResult
 import com.imams.core.toError
 import com.imams.newsapi.mapper.NewsMapper.toModel
 import com.imams.newsapi.model.Article
+import com.imams.newsapi.model.Category
 import com.imams.newsapi.model.Source
+import com.imams.newsapi.source.local.newsCategories
 import com.imams.newsapi.source.remote.service.NewsApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -81,6 +83,10 @@ class NewsRepositoryImpl @Inject constructor(
                 e.toError()
             }
         }
+    }
+
+    override suspend fun getCategories(): List<Category> {
+        return newsCategories()
     }
 
 }
