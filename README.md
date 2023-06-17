@@ -1,9 +1,9 @@
 # Wartasatu
-Simple News Headlines apps from The News API data source (https://www.thenewsapi.com/documentation)
+Simple News Headlines apps from News API data source (https://newsapi.org/docs/endpoints/top-headlines)
 
 Developer: Imam Sulthon (imamsulthon@gmail.com)
 
-This Android apps was developed in order for technical test submission for Android Developer job at PT PT. Ako Media Asia (Salt)
+This Android apps was developed in order to fulfill technical test for Android Developer job at PT. Ako Media Asia (Salt)
 
 <img src="/screenshot_1.jpg" width="140"> <img src="/screenshot_2.jpg" width="140"> <img src="/screenshot_3.jpg" width="140"> <img src="/screenshot_4.jpg" width="140">
 
@@ -17,7 +17,7 @@ Libraries:
   Logs HTTP request and response data.
 - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines.
 - [Flows](https://developer.android.com/kotlin/flow)
-  Flows are built on top of coroutines and can provide multiple values. A flow is conceptually a stream of data that can be computed asynchronously.
+  are built on top of coroutines and can provide multiple values. A flow is conceptually a stream of data that can be computed asynchronously.
 - [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) The Paging library helps you load and display pages of data from a larger dataset from local storage or over network. This approach allows your app to use both network bandwidth and system resources more efficiently
 - [Glide](https://github.com/bumptech/glide) is a fast and efficient open source media management and image loading framework for Android that wraps media decoding, memory and disk caching, and resource pooling into a simple and easy to use interface.
 - [Mockk](https://mockk.io) Provides DSL to mock behavior. Built from zero to fit Kotlin language. Supports named parameters, object mocks, coroutines and extension function mocking.
