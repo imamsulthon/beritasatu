@@ -1,4 +1,4 @@
-package com.imams.wartasatu
+package com.imams.beritasatu
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

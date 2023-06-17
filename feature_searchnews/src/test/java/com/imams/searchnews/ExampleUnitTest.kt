@@ -1,4 +1,4 @@
-package com.imams.wartasatu
+package com.imams.searchnews
 
 import org.junit.Test
 

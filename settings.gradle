@@ -12,8 +12,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Wartasatu"
+rootProject.name = "beritasatu"
 include ':app'
 include ':core'
 include ':newsapi'
 include ':feature_topnews'
+include ':feature_searchnews'
