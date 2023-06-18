@@ -24,7 +24,6 @@ class ArticleListByCategoryVM @Inject constructor(
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
-    var country = "id"
     private var category = ""
     private var source = "bloomberg"
     var query: String? = null

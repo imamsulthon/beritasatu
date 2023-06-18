@@ -61,7 +61,6 @@ class DetailActivity : AppCompatActivity() {
             tvTitle.setOrGone(item.title)
             tvSource.setOrGone(item.authorAndSource())
             tvDate.setOrGone(item.publishedAt.simpleFormattedDate())
-            tvContent.setOrGone(item.content)
             tvDescriptions.setOrGone(item.description)
             loadUrl(item.url)
         }

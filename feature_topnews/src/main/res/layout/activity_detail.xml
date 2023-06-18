@@ -87,16 +87,6 @@
                         android:textSize="12sp"
                         tools:text="@string/label_very_long_subtitle" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:ellipsize="end"
-                        android:maxLines="3"
-                        android:textSize="12sp"
-                        tools:text="@string/label_short_title" />
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"

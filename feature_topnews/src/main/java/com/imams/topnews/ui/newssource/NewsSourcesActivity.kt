@@ -2,6 +2,9 @@ package com.imams.topnews.ui.newssource
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
+import com.imams.core.utils.countryLabels
+import com.imams.core.utils.getCountryCode
 import com.imams.core.utils.visible
 import com.imams.core.utils.wartaLog
 import com.imams.newsapi.model.Source
@@ -100,6 +105,8 @@ class NewsSourcesActivity : AppCompatActivity() {
                 rvAllNews.isVisible = !isErrorOrEmpty
             }
 
+            setupCountryAdapter()
+
             searchView.doAfterTextChanged {
                 log("afterTextChanged ${it.toString()}")
                 doSearch(it.toString())
@@ -133,6 +140,30 @@ class NewsSourcesActivity : AppCompatActivity() {
         log("setAllSource")
         binding.rvAllNews.visible()
         listAdapter.submitData(lifecycle, list)
+    }
+
+    private fun setupCountryAdapter() {
+        with(binding) {
+            val countryLabels = countryLabels()
+            optionalCountry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    if (countryLabels[p2].getCountryCode() == viewModel.country) return
+                    viewModel.country = countryLabels[p2].getCountryCode()
+                    doRefresh()
+                }
+                override fun onNothingSelected(p0: AdapterView<*>?) {}
+            }
+            ArrayAdapter(
+                this@NewsSourcesActivity,
+                android.R.layout.simple_spinner_dropdown_item,
+                countryLabels
+            ).also { arrayAdapter ->
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                optionalCountry.adapter = arrayAdapter
+                optionalCountry.setSelection(countryLabels.indexOf("United States"))
+            }
+        }
+
     }
 
     private fun openNews(sourceId: String) {

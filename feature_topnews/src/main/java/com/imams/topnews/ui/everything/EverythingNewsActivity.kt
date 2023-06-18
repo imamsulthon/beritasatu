@@ -5,8 +5,14 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.imams.core.utils.visible
+import com.imams.core.utils.wartaLog
+import com.imams.newsapi.mapper.NewsMapper.toBundle
+import com.imams.newsapi.model.Article
 import com.imams.topnews.databinding.ActivityEverythingNewsBinding
 import com.imams.topnews.ui.CategoryAdapter
+import com.imams.topnews.ui.detail.DetailActivity
+import com.imams.topnews.ui.home.SimpleNewsAdapter
 import com.imams.topnews.ui.newssource.NewsSourcesActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -24,6 +30,11 @@ class EverythingNewsActivity : AppCompatActivity() {
         )
     }
 
+
+    private val listAdapter: SimpleNewsAdapter by lazy {
+        SimpleNewsAdapter(callback = ::openDetail, list = listOf())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -34,6 +45,7 @@ class EverythingNewsActivity : AppCompatActivity() {
 
     private fun fetchData() {
         viewModel.fetchData()
+        viewModel.fetchTopNews()
     }
 
     private fun observeViewModel() {
@@ -43,12 +55,16 @@ class EverythingNewsActivity : AppCompatActivity() {
                     categoryAdapter.submit(it)
                 }
             }
+            viewModel.topNews.observe(this@EverythingNewsActivity) {
+                it?.let { setAllNews(it) }
+            }
         }
     }
 
     private fun initViewAndListener() {
         with(binding) {
             rvCategory.adapter = categoryAdapter
+            rvTopNews.adapter = listAdapter
         }
     }
 
@@ -58,4 +74,16 @@ class EverythingNewsActivity : AppCompatActivity() {
         })
     }
 
+    private fun setAllNews(list: List<Article>) {
+        wartaLog("Everything $list")
+        binding.tvTitleTopNews.visible()
+        binding.rvTopNews.visible()
+        listAdapter.submitData(list)
+    }
+
+    private fun openDetail(item: Article) {
+        startActivity(Intent(this, DetailActivity::class.java).apply {
+            putExtra(DetailActivity.DATA, item.toBundle())
+        })
+    }
 }

@@ -5,16 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.liveData
 import com.imams.core.TheResult
 import com.imams.core.utils.wartaLog
 import com.imams.newsapi.model.Source
 import com.imams.newsapi.repository.NewsRepository
-import com.imams.topnews.domain.NewsSourcePagination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -30,18 +26,17 @@ class NewsSourceVM @Inject constructor(
     private val _stateEnableSearch = MutableLiveData(false)
     val stateEnableSearch: LiveData<Boolean> = _stateEnableSearch
 
+    var country: String? = null
     var tag = "health"
     var query = ""
 
     private val _result: MutableList<Source> = mutableListOf()
     private val _dataSource: MutableLiveData<PagingData<Source>> = MutableLiveData()
-    private val _r = MutableLiveData<List<Source>>(emptyList())
-    private val _res:LiveData<List<Source>> = _r
     fun paginationFlow(): Flow<PagingData<Source>> = _dataSource.asFlow().cachedIn(viewModelScope)
 
     fun fetchData() {
         viewModelScope.launch {
-            when (val result = repository.getSources(tag, null)) {
+            when (val result = repository.getSources(tag, country)) {
                 is TheResult.Success -> {
                     _result.clear()
                     _result.addAll(result.data)
@@ -54,23 +49,6 @@ class NewsSourceVM @Inject constructor(
                 }
             }
         }
-    }
-
-    private fun liveDataOf(list: List<Source>): LiveData<PagingData<Source>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 3,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = {
-                NewsSourcePagination(
-                    list,
-                    callback = { code, message ->
-                        _errorMessage.postValue("code: $code \n $message")
-                    }
-                )
-            }
-        ).liveData.cachedIn(viewModelScope)
     }
 
     fun search(q: String) {

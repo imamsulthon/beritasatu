@@ -49,9 +49,8 @@ class ArticleListActivity : AppCompatActivity() {
             val category = it.getString(TAG_CATEGORY).orEmpty()
             val source = it.getString(TAG_SOURCE).orEmpty()
             viewModel.setupParams(category, source)
-            val topTitle = "By $source"
+            val topTitle = "$category By $source"
             binding.tvPageTitle.text = topTitle
-            binding.tvCategory.text = category
         }
     }
 

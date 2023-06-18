@@ -1,5 +1,6 @@
 package com.imams.topnews.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.LoadState
@@ -18,7 +19,7 @@ import com.imams.topnews.databinding.LoadingBinding
 
 class PagingNewsAdapter(
     private val callback: ((Article) -> Unit)?
-): PagingDataAdapter<Article, LandscapeNewsVH>(DIFF_CALLBACK) {
+) : PagingDataAdapter<Article, LandscapeNewsVH>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Article>() {
@@ -40,18 +41,20 @@ class PagingNewsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LandscapeNewsVH {
-        return LandscapeNewsVH(ItemNewsLandscapeBinding.bind(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_news_landscape, parent, false
+        return LandscapeNewsVH(
+            ItemNewsLandscapeBinding.bind(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_news_landscape, parent, false
+                )
             )
-        ))
+        )
     }
 
 }
 
 class LandscapeNewsVH(
     private val binding: ItemNewsLandscapeBinding,
-): RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Article) {
         with(binding) {
@@ -106,6 +109,37 @@ class LoadingStateAdapter : LoadStateAdapter<LoadingStateAdapter.ViewHolder>() {
                     .inflate(R.layout.loading, parent, false)
             )
         )
+    }
+
+}
+
+class SimpleNewsAdapter(
+    private var list: List<Article>,
+    private val callback: ((Article) -> Unit)?
+) : RecyclerView.Adapter<LandscapeNewsVH>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LandscapeNewsVH {
+        return LandscapeNewsVH(
+            ItemNewsLandscapeBinding.bind(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_news_landscape, parent, false
+                )
+            )
+        )
+    }
+
+    override fun getItemCount(): Int = list.size
+    override fun onBindViewHolder(holder: LandscapeNewsVH, position: Int) {
+        val article = list[position]
+        holder.bind(article)
+        holder.itemView.setOnClickListener {
+            callback?.invoke(article)
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitData(list: List<Article>) {
+        this.list = list
+        notifyDataSetChanged()
     }
 
 }
