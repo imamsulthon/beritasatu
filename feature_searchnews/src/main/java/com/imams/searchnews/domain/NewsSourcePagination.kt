@@ -2,17 +2,16 @@ package com.imams.searchnews.domain
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.bumptech.glide.load.HttpException
-import com.imams.core.TheResult
+import com.imams.core.utils.wartaLog
 import com.imams.newsapi.model.Source
-import com.imams.newsapi.repository.NewsRepository
 import java.io.IOException
 
 class NewsSourcePagination(
-    private val repository: NewsRepository,
-    private val category: String,
+    private val list: List<Source> = mutableListOf(),
     private val callback: (String, String) -> Unit,
 ) : PagingSource<Int, Source>() {
+
+    private var _list = list
 
     override fun getRefreshKey(state: PagingState<Int, Source>): Int? {
         return state.anchorPosition?.let {
@@ -24,27 +23,44 @@ class NewsSourcePagination(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Source> {
         val page = params.key ?: 1
         return try {
-            when (val response = repository.getSources()) {
-                is TheResult.Success -> {
-                    val list = response.data
+//            if (page == 1) {
+//                when (val response = repository.getSources(category, country)) {
+//                    is TheResult.Success -> {
+//                        list = response.data
+//                        log("size ${list.size}")
+//                    }
+//                    is TheResult.Error -> {
+//                        log("error ${response.message}")
+//                        callback.invoke(response.code, response.message)
+//                        return LoadResult.Error(Throwable(message = "error"))
+//                    }
+//                }
+//            }
+            log("list: ${_list.size} loadSize: ${params.loadSize} key: ${params.key} page: $page")
+            when {
+                _list.isNotEmpty() -> {
+                    val toLoad = _list.take(params.loadSize)
+                    _list = _list.drop(params.loadSize)
                     LoadResult.Page(
-                        list,
+                        toLoad,
                         prevKey = if (page == 1) null else page - 1,
                         nextKey = if (list.isEmpty()) null else page + 1
                     )
                 }
-                is TheResult.Error -> {
-                    callback.invoke(response.code, response.message)
-                    LoadResult.Error(Throwable(message = response.code))
-                }
+                 else -> {
+                     LoadResult.Page(
+                         emptyList(),
+                         prevKey = null,
+                         nextKey = null,
+                     )
+                 }
             }
         } catch (exception: IOException) {
             callback.invoke("IOException", exception.message ?: "unknown")
             return LoadResult.Error(exception)
-        } catch (exception: HttpException) {
-            callback.invoke("HttpException", exception.message ?: "unknown")
-            return LoadResult.Error(exception)
         }
     }
+
+    private fun log(msg: String) = wartaLog("NewsSourcePagination: $msg")
 
 }

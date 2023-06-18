@@ -4,7 +4,7 @@
     <string name="label_short_title">Short Title</string>
     <string name="see_all">See All</string>
     <string name="label_on_loading">On Loading. Please Wait</string>
-    <string name="label_category">Category</string>
+    <string name="label_category">News Category</string>
     <string name="label_empty_data">No News Found</string>
     <string name="label_error_data">Something Went Wrong</string>
 

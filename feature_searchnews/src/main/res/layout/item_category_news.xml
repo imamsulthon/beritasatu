@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="4dp"
-    android:layout_marginBottom="4dp"
+    android:layout_marginEnd="6dp"
+    android:layout_marginBottom="6dp"
     app:cardCornerRadius="8dp"
-    app:cardUseCompatPadding="true"
-    app:cardElevation="4dp"
-    tools:ignore="RtlSymmetry">
+    app:cardElevation="4dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
@@ -17,10 +15,10 @@
         android:layout_height="wrap_content"
         android:background="@color/purple_200"
         android:maxLines="1"
-        android:padding="10dp"
+        android:padding="12dp"
+        android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

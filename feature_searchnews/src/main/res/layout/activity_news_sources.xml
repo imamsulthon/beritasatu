@@ -10,25 +10,53 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/appbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="5dp">
+        android:background="@color/white">
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/optional_country"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="name"
-            android:fontFamily="serif"
-            android:textAlignment="textEnd"
-            android:textSize="11sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:autofillHints="Autofill hint"
+                android:drawableEnd="@android:drawable/ic_menu_search"
+                android:hint="Search Source"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxHeight="80dp"
+                android:maxLines="1"
+                android:queryHint="Query Hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="0.5"
+                app:layout_constraintStart_toEndOf="@id/optional_country"
+                app:layout_constraintTop_toTopOf="parent"
+                app:queryHint="Just Search Source" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/optional_country"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:fontFamily="serif"
+                android:textAlignment="textEnd"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@id/search_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/search_view"
+                tools:layout_width="120dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
@@ -48,10 +76,13 @@
                 android:clipToPadding="true"
                 android:nestedScrollingEnabled="true"
                 android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="2"
                 tools:itemCount="10"
+                tools:listitem="@layout/item_news_source"
                 tools:visibility="visible" />
 
             <androidx.appcompat.widget.AppCompatTextView

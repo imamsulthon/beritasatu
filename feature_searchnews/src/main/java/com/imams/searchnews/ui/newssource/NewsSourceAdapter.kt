@@ -2,12 +2,17 @@ package com.imams.searchnews.ui.newssource
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.LoadState
+import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.imams.core.utils.gone
+import com.imams.core.utils.visible
 import com.imams.newsapi.model.Source
 import com.imams.searchnews.R
 import com.imams.searchnews.databinding.ItemNewsSourceBinding
+import com.imams.searchnews.databinding.LoadingBinding
 
 class NewsSourceAdapter(
     private val callback: ((Source) -> Unit)?,
@@ -15,6 +20,7 @@ class NewsSourceAdapter(
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Source>() {
+
             override fun areItemsTheSame(oldItem: Source, newItem: Source): Boolean =
                 oldItem == newItem
 
@@ -50,17 +56,51 @@ class NewsSourceVH(
 
     fun bind(item: Source) {
         with(binding) {
-//            try {
-//                com.bumptech.glide.Glide.with(itemView.context)
-//                    .load(item.urlToImage)
-//                    .error(R.drawable.ic_newspaper)
-//                    .into(viewLeft)
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
             tvTitle.text = item.name
-//            tvSubTitle.text = item.publishedAt.simpleFormattedDate()
-//            tvDesc.text = item.authorAndSource()
+            tvSubTitle.text = item.url
+            tvDesc.text = item.description
+            tvCountry.text = item.country
+            tvLanguage.text = item.language
         }
     }
+}
+
+class LoadingStateAdapter : LoadStateAdapter<LoadingStateAdapter.ViewHolder>() {
+
+    class ViewHolder(private val binding: LoadingBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(loadState: LoadState) {
+            with(binding) {
+                when (loadState) {
+                    is LoadState.Loading -> {
+                        tvLoading.visible()
+                        tvMessage.gone()
+                    }
+                    is LoadState.Error -> {
+                        tvLoading.gone()
+                        tvMessage.visible()
+                        tvMessage.text = "Error\n${loadState.error.message}"
+                    }
+                    is LoadState.NotLoading -> {
+                        tvLoading.gone()
+                        tvMessage.gone()
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, loadState: LoadState) {
+        holder.bind(loadState)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): ViewHolder {
+        return ViewHolder(
+            LoadingBinding.bind(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.loading, parent, false)
+            )
+        )
+    }
+
 }

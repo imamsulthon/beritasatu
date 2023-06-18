@@ -11,7 +11,7 @@ interface NewsRepository {
 
     suspend fun getTopNews(page: Int, country: String): TheResult<List<Article>>
 
-    suspend fun getSources(): TheResult<List<Source>>
+    suspend fun getSources(category: String, country: String?): TheResult<List<Source>>
 
     suspend fun getCategories(): List<Category>
 

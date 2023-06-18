@@ -50,7 +50,7 @@ class EverythingNewsActivity : AppCompatActivity() {
 
     private fun initViewAndListener() {
         with(binding) {
-            rvCategory.layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL)
+//            rvCategory.layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL)
             rvCategory.adapter = categoryAdapter
         }
     }

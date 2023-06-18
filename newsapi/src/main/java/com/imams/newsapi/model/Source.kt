@@ -8,4 +8,6 @@ data class Source(
     var category: String,
     var language: String,
     var country: String,
-)
+) {
+    fun countryAndLang(): String = "$country ($language)"
+}

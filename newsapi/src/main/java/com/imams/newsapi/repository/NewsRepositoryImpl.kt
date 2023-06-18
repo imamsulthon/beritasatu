@@ -61,10 +61,10 @@ class NewsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getSources(): TheResult<List<Source>> {
+    override suspend fun getSources(category: String, country: String?): TheResult<List<Source>> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = apiService.getNewsSource()
+                val response = apiService.getNewsSource(category = category, country = country)
                 when {
                     response.status.equals("error", true) -> {
                         TheResult.Error(

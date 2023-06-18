@@ -26,6 +26,7 @@ interface NewsApiService {
     @GET("top-headlines/sources")
     suspend fun getNewsSource(
         @Query("category") category: String? = null,
+        @Query("country") country: String? = null,
     ): NewsSourcesResponse
 
 }
