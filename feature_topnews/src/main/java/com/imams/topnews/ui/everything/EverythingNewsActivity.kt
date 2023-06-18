@@ -1,15 +1,13 @@
-package com.imams.searchnews
+package com.imams.topnews.ui.everything
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.imams.searchnews.databinding.ActivityEverythingNewsBinding
-import com.imams.searchnews.ui.CategoryAdapter
-import com.imams.searchnews.ui.EverythingNewsVM
-import com.imams.searchnews.ui.NewsSourcesActivity
+import com.imams.topnews.databinding.ActivityEverythingNewsBinding
+import com.imams.topnews.ui.CategoryAdapter
+import com.imams.topnews.ui.newssource.NewsSourcesActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -50,7 +48,6 @@ class EverythingNewsActivity : AppCompatActivity() {
 
     private fun initViewAndListener() {
         with(binding) {
-//            rvCategory.layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL)
             rvCategory.adapter = categoryAdapter
         }
     }

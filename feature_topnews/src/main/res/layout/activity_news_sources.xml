@@ -37,12 +37,12 @@
                 android:queryHint="Query Hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="0.5"
-                app:layout_constraintStart_toEndOf="@id/optional_country"
+                app:layout_constraintStart_toEndOf="@id/tv_category"
                 app:layout_constraintTop_toTopOf="parent"
                 app:queryHint="Just Search Source" />
 
             <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/optional_country"
+                android:id="@+id/tv_category"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:autofillHints="name"

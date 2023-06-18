@@ -2,6 +2,7 @@ package com.imams.newsapi.repository
 
 import com.imams.core.TheResult
 import com.imams.core.toError
+import com.imams.core.utils.wartaLog
 import com.imams.newsapi.mapper.NewsMapper.toModel
 import com.imams.newsapi.model.Article
 import com.imams.newsapi.model.Category
@@ -16,10 +17,16 @@ class NewsRepositoryImpl @Inject constructor(
     private val apiService: NewsApiService,
 ): NewsRepository {
 
-    override suspend fun getNews(page: Int): TheResult<List<Article>> {
+    override suspend fun getNews(
+        page: Int,
+        category: String,
+        source: String,
+        query: String?
+    ): TheResult<List<Article>> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = apiService.getNews(page = page)
+                wartaLog("Repos s $source q $query c $category")
+                val response = apiService.getNews(page = page, sources = source, query = query)
                 when {
                     response.status == "error" -> {
                         TheResult.Error(code = response.code.orEmpty(), message = response.message.orEmpty())

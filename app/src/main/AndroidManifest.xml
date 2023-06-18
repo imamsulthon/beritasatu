@@ -24,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.imams.topnews.ui.home.HomeTopNewsActivity"
             android:exported="true">
@@ -33,13 +32,14 @@
         <activity
             android:name="com.imams.topnews.ui.detail.DetailActivity"
             android:exported="false" />
-
         <activity
-            android:name="com.imams.searchnews.EverythingNewsActivity"
+            android:name="com.imams.topnews.ui.everything.EverythingNewsActivity"
             android:exported="false" />
-
         <activity
-            android:name="com.imams.searchnews.ui.NewsSourcesActivity"
+            android:name="com.imams.topnews.ui.newssource.NewsSourcesActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.imams.topnews.ui.article.ArticleListActivity"
             android:exported="false" />
 
     </application>

@@ -9,9 +9,10 @@ interface NewsApiService {
 
     @GET("everything")
     suspend fun getNews(
-        @Query("q") query: String? = null,
         @Query("page") page: Int? = null,
         @Query("pageSize") pageSize: Int? = 10,
+        @Query("q") query: String? = null,
+        @Query("sources") sources: String? = null,
     ): NewsResponse
 
     @GET("top-headlines")

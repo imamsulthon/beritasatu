@@ -1,5 +1,6 @@
-package com.imams.searchnews.ui
+package com.imams.topnews.ui.newssource
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -13,11 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.imams.core.utils.visible
 import com.imams.core.utils.wartaLog
 import com.imams.newsapi.model.Source
-import com.imams.searchnews.R
-import com.imams.searchnews.databinding.ActivityNewsSourcesBinding
-import com.imams.searchnews.ui.newssource.LoadingStateAdapter
-import com.imams.searchnews.ui.newssource.NewsSourceAdapter
-import com.imams.searchnews.ui.newssource.NewsSourceVM
+import com.imams.topnews.R
+import com.imams.topnews.databinding.ActivityNewsSourcesBinding
+import com.imams.topnews.ui.article.ArticleListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -41,7 +40,7 @@ class NewsSourcesActivity : AppCompatActivity() {
     private var tag = ""
 
     companion object {
-        const val TAG_ID = "source_id"
+        const val TAG_ID = "category_id"
     }
 
     private fun getIntentData() {
@@ -136,8 +135,14 @@ class NewsSourcesActivity : AppCompatActivity() {
         listAdapter.submitData(lifecycle, list)
     }
 
-    private fun openNews(category: String) {
-        log("click $category")
+    private fun openNews(sourceId: String) {
+        log("click $sourceId")
+        startActivity(Intent(this, ArticleListActivity::class.java).apply {
+            putExtra(ArticleListActivity.TAG_DATA, Bundle().apply {
+                putString(ArticleListActivity.TAG_CATEGORY, tag)
+                putString(ArticleListActivity.TAG_SOURCE, sourceId)
+            })
+        })
     }
 
     private fun log(msg: String) {

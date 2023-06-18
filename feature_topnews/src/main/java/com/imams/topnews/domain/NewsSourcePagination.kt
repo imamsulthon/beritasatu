@@ -1,4 +1,4 @@
-package com.imams.searchnews.domain
+package com.imams.topnews.domain
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

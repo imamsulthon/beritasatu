@@ -7,7 +7,9 @@ import com.imams.newsapi.model.Source
 
 interface NewsRepository {
 
-    suspend fun getNews(page: Int): TheResult<List<Article>>
+    suspend fun getNews(
+        page: Int, category: String, source: String, query: String?
+    ): TheResult<List<Article>>
 
     suspend fun getTopNews(page: Int, country: String): TheResult<List<Article>>
 

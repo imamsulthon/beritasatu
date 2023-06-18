@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation "androidx.paging:paging-runtime-ktx:$version_paging"
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$version_hilt"

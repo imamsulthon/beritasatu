@@ -1,12 +1,12 @@
-package com.imams.searchnews.ui
+package com.imams.topnews.ui
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.imams.searchnews.R
-import com.imams.searchnews.databinding.ItemCategoryNewsBinding
 import com.imams.newsapi.model.Category
+import com.imams.topnews.R
+import com.imams.topnews.databinding.ItemCategoryNewsBinding
 
 class CategoryAdapter(
     private var list: List<Category>,
@@ -14,7 +14,8 @@ class CategoryAdapter(
 ): RecyclerView.Adapter<CategoryVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryVH {
-        return CategoryVH(ItemCategoryNewsBinding.bind(
+        return CategoryVH(
+            ItemCategoryNewsBinding.bind(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_category_news, parent, false
             )

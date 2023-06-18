@@ -1,4 +1,4 @@
-package com.imams.searchnews.ui
+package com.imams.topnews.ui.everything
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

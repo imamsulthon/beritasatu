@@ -1,4 +1,4 @@
-package com.imams.searchnews.ui.newssource
+package com.imams.topnews.ui.newssource
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.imams.core.utils.gone
 import com.imams.core.utils.visible
 import com.imams.newsapi.model.Source
-import com.imams.searchnews.R
-import com.imams.searchnews.databinding.ItemNewsSourceBinding
-import com.imams.searchnews.databinding.LoadingBinding
+import com.imams.topnews.R
+import com.imams.topnews.databinding.ItemNewsSourceBinding
+import com.imams.topnews.databinding.LoadingBinding
 
 class NewsSourceAdapter(
     private val callback: ((Source) -> Unit)?,

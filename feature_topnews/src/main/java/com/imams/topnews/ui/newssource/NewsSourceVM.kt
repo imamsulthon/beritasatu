@@ -1,4 +1,4 @@
-package com.imams.searchnews.ui.newssource
+package com.imams.topnews.ui.newssource
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +14,7 @@ import com.imams.core.TheResult
 import com.imams.core.utils.wartaLog
 import com.imams.newsapi.model.Source
 import com.imams.newsapi.repository.NewsRepository
-import com.imams.searchnews.domain.NewsSourcePagination
+import com.imams.topnews.domain.NewsSourcePagination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
