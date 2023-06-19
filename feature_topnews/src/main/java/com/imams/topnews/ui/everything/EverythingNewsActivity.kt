@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.imams.core.utils.gone
 import com.imams.core.utils.visible
 import com.imams.newsapi.mapper.NewsMapper.toBundle
 import com.imams.newsapi.model.Article
@@ -74,9 +75,17 @@ class EverythingNewsActivity : AppCompatActivity() {
     }
 
     private fun setAllNews(list: List<Article>) {
-        binding.tvTitleTopNews.visible()
-        binding.rvTopNews.visible()
-        listAdapter.submitData(list)
+        with(binding) {
+            tvTitleTopNews.visible()
+            tvSeeAllTopNews.visible()
+            rvTopNews.visible()
+            listAdapter.submitData(list)
+            if (list.isEmpty()) {
+                tvTitleTopNews.gone()
+                tvSeeAllTopNews.gone()
+                rvTopNews.gone()
+            }
+        }
     }
 
     private fun openDetail(item: Article) {
