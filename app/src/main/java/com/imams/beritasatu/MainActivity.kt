@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private fun gotoHome() {
         lifecycleScope.launch {
             delay(1000)
-//            startActivity(Intent(this@MainActivity, HomeTopNewsActivity::class.java))
             startActivity(Intent(this@MainActivity, EverythingNewsActivity::class.java))
             finish()
         }
