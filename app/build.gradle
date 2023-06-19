@@ -54,6 +54,5 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$version_hilt"
 
     implementation project(":feature_topnews")
-    implementation project(":feature_searchnews")
 
 }

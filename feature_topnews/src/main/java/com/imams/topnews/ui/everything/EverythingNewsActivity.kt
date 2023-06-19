@@ -6,7 +6,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.imams.core.utils.visible
-import com.imams.core.utils.wartaLog
 import com.imams.newsapi.mapper.NewsMapper.toBundle
 import com.imams.newsapi.model.Article
 import com.imams.topnews.databinding.ActivityEverythingNewsBinding
@@ -75,7 +74,6 @@ class EverythingNewsActivity : AppCompatActivity() {
     }
 
     private fun setAllNews(list: List<Article>) {
-        wartaLog("Everything $list")
         binding.tvTitleTopNews.visible()
         binding.rvTopNews.visible()
         listAdapter.submitData(list)

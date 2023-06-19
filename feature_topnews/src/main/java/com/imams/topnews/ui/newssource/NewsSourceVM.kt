@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.imams.core.TheResult
-import com.imams.core.utils.wartaLog
 import com.imams.newsapi.model.Source
 import com.imams.newsapi.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -52,10 +51,8 @@ class NewsSourceVM @Inject constructor(
     }
 
     fun search(q: String) {
-        log("search before $query ${_result.isEmpty()}")
         query = q
         if (_result.isEmpty()) return
-        log("search after $query")
         proceed(_result, query)
     }
 
@@ -67,11 +64,8 @@ class NewsSourceVM @Inject constructor(
     private fun proceed(list: List<Source>, query: String) {
         viewModelScope.launch {
             val l = if (query.isEmpty()) list else list.filter { it.name.equals(query, true) }
-            log("proceed l size ${l.size} q $query")
             _dataSource.postValue(PagingData.from(l))
         }
     }
-
-    private fun log(msg: String) = wartaLog("NewsSourceVM: $msg")
 
 }

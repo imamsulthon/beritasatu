@@ -3,8 +3,6 @@ Simple News Headlines apps from News API data source (https://newsapi.org/docs/e
 
 Developer: Imam Sulthon (imamsulthon@gmail.com)
 
-This Android apps was developed in order to fulfill technical test for Android Developer job at PT. Ako Media Asia (Salt)
-
 <img src="/screenshot_1.jpg" width="140"> <img src="/screenshot_2.jpg" width="140"> <img src="/screenshot_3.jpg" width="140"> <img src="/screenshot_4.jpg" width="140">
 
 Libraries:

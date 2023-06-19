@@ -2,17 +2,12 @@ package com.imams.topnews.ui.newssource
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.LoadState
-import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.imams.core.utils.gone
-import com.imams.core.utils.visible
 import com.imams.newsapi.model.Source
 import com.imams.topnews.R
 import com.imams.topnews.databinding.ItemNewsSourceBinding
-import com.imams.topnews.databinding.LoadingBinding
 
 class NewsSourceAdapter(
     private val callback: ((Source) -> Unit)?,
@@ -63,44 +58,4 @@ class NewsSourceVH(
             tvLanguage.text = item.language
         }
     }
-}
-
-class LoadingStateAdapter : LoadStateAdapter<LoadingStateAdapter.ViewHolder>() {
-
-    class ViewHolder(private val binding: LoadingBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(loadState: LoadState) {
-            with(binding) {
-                when (loadState) {
-                    is LoadState.Loading -> {
-                        tvLoading.visible()
-                        tvMessage.gone()
-                    }
-                    is LoadState.Error -> {
-                        tvLoading.gone()
-                        tvMessage.visible()
-                        tvMessage.text = "Error\n${loadState.error.message}"
-                    }
-                    is LoadState.NotLoading -> {
-                        tvLoading.gone()
-                        tvMessage.gone()
-                    }
-                }
-            }
-        }
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, loadState: LoadState) {
-        holder.bind(loadState)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): ViewHolder {
-        return ViewHolder(
-            LoadingBinding.bind(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.loading, parent, false)
-            )
-        )
-    }
-
 }

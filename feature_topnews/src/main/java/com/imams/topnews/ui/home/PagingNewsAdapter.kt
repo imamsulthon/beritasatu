@@ -77,6 +77,7 @@ class LoadingStateAdapter : LoadStateAdapter<LoadingStateAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: LoadingBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(loadState: LoadState) {
             with(binding) {
                 when (loadState) {

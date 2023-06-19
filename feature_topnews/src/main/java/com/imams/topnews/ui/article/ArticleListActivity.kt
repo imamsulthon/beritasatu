@@ -86,13 +86,12 @@ class ArticleListActivity : AppCompatActivity() {
 
                 val isErrorOrEmpty = it.refresh is LoadState.Error ||
                         (it.refresh is LoadState.NotLoading && listAdapter.itemCount == 0)
-                tvLoadState.isVisible = isErrorOrEmpty
+                errorState.root.isVisible = isErrorOrEmpty
                 if (it.refresh is LoadState.Error) {
-                    tvLoadState.text = getString(R.string.label_error_data)
+                    errorState.tvLoadState.text = getString(R.string.label_error_data)
                 }
-
                 if (it.refresh is LoadState.NotLoading && listAdapter.itemCount == 0) {
-                    tvLoadState.text = getString(R.string.label_empty_data)
+                    errorState.tvLoadState.text = getString(R.string.label_empty_data)
                 }
                 rvAllNews.isVisible = !isErrorOrEmpty
             }
